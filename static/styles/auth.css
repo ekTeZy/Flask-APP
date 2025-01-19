@@ -1,0 +1,77 @@
+@font-face {
+	font-family: 'Roboto', sans-serif; 
+	src: url("C:/Users/egor/AppData/Local/Programs/Python/zmei/fonts/Roboto-Regular"); 
+}
+
+body {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+.auth-container {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 400px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.auth-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.auth-tab {
+    font-size: 1.2em;
+    color: #333;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.auth-tab.active {
+    color: red;
+    font-weight: bold;
+    border-bottom: 2px solid red;
+}
+
+.auth-close {
+    color: #333;
+    font-size: 1.2em;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.auth-close:hover {
+    color: red;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.auth-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    background-color: #8b0000;
+}

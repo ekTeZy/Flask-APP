@@ -1,0 +1,156 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}Управление продавцами{% endblock %}
+
+{% block content %}
+<style>
+    .table-container {
+        max-width: 100%;
+        margin: 20px auto;
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #1565c0;
+        font-size: 2rem;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 5px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f1f1f1;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f8ff;
+    }
+    
+    table input, table select {
+        width: calc(100% - 10px); /* Уменьшаем ширину для учета padding */
+        box-sizing: border-box; /* Учитываем границы и padding внутри ширины */
+        padding: 5px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 0; /* Убираем внешние отступы */
+    }
+
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+    }
+
+    .btn-create {
+        background-color: #1565c0;
+        align: center;
+    }
+    
+
+    .btn-success:hover {
+        background-color: #218838;
+        transform: translateY(-3px);
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        transform: translateY(-3px);
+    }
+
+    select, input {
+        width: 100%;
+        padding: 5px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn a{
+        text-decoration: none;
+        color: #fff;
+    }
+</style>
+
+<div class="table-container">
+    <h2>Управление администраторами</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <table>
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for admin in admins %}
+            <tr>
+                <form method="POST" action="{{ url_for('admin.manage_admins') }}">
+                    <input type="hidden" name="admin_id" value="{{ admin.admin_id }}">
+                    <td><input type="text" name="name" value="{{ admin.name }}" required></td>
+                    <td><input type="email" name="email" value="{{ admin.email }}" required></td>
+                    <td><input type="tel" name="phone" value="{{ admin.phone }}" required></td>
+                    <td>
+                        <select name="status">
+                            <option value='active' {% if admin.status == 'active' %}selected{% endif %}>Активный</option>
+                            <option value='inactive' {% if admin.status == 'inactive' %}selected{% endif %}>Неактивный</option>
+                        </select>
+                    </td>                    <td>
+                        <button type="submit" name="action" value="edit" class="btn btn-success">Сохранить изменения</button>
+                        <button type="submit" name="action" value="delete" class="btn btn-danger">Удалить</button>
+                    </td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if current_user.__class__.__name__ == 'Admin'%}
+    <button href="{{ url_for('admin.create_admin') }}" method="POST" class='btn btn-blue'>
+        <a href="{{ url_for('admin.create_admin') }}">Добавить админа</a>
+    </button>
+    {% endif %}
+</div>
+{% endblock %}

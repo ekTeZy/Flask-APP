@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Создать нового продавца{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #90caf9);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #1565c0;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #90caf9;
+        }
+
+        .content {
+            margin: 80px auto 25px;
+            max-width: 90%;
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 166px;
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        input:focus {
+            border-color: #1976d2;
+            outline: none;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button-group .btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn-blue {
+            background-color: #1976d2;
+        }
+
+        .btn-blue:hover {
+            background-color: #1565c0;
+            transform: translateY(-2px);
+        }
+
+        .btn-red {
+            background-color: #d32f2f;
+            margin-left: 10px;
+        }
+
+        .btn-red:hover {
+            background-color: #b71c1c;
+            transform: translateY(-2px);
+        }
+
+        .btn a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Панель администратора</h1>
+        <div>
+            <a href="{{ url_for('admin.admin_dashboard') }}">Главная</a>
+            <a href="{{ url_for('admin.manage_users') }}">Пользователи</a>
+            <a href="{{ url_for('admin.manage_sellers') }}">Продавцы</a>
+            {% if current_user.__class__.__name__ == 'Admin' %}
+                <a href="{{ url_for('admin.manage_admins') }}">Администраторы</a>
+            {% endif %}
+            <a href="{{ url_for('catalog.catalog') }}">Каталог</a>
+            <a href="{{ url_for('auth.logout') }}">Выход</a>
+        </div>
+    </div>
+    <div class="content">
+        <h1>Создать нового продавца</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        <div class="form-container">
+            <form method="POST" action="{{ url_for('admin.create_seller') }}">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" placeholder="Введите имя" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Введите email" required>
+                
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" placeholder="Введите телефон" required>
+                
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+                
+                <label for="confirm_password">Подтвердите пароль</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Подтвердите пароль" required>
+                
+                <div class="button-group">
+                    <button type="submit" class="btn btn-blue">Создать</button>
+                    <a href="{{ url_for('admin.manage_sellers') }}" class="btn btn-red">Отмена</a>
+                </div>
+            </form>
+        </div>        
+    </div>
+</body>
+</html>

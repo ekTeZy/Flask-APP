@@ -1,0 +1,135 @@
+@font-face {
+    font-family: 'Roboto', sans-serif;
+    src: url("C:/Users/egor/AppData/Local/Programs/Python/zmei/fonts/Roboto-Regular");
+}
+
+body {
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #d3d6e0;
+    color: #333;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.wishlist-container {
+    max-width: 900px;
+    width: 100%;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+h1 {
+    font-size: 28px;
+    text-align: center;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.wishlist-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.wishlist-table th, .wishlist-table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 1px solid #bbb;
+}
+
+.wishlist-table th {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+.wishlist-table td {
+    background-color: #f9f9f9;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-name {
+    font-size: 18px;
+    color: #222;
+    font-weight: bold;
+}
+
+.quantity-input {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.remove-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.remove-button:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+.wishlist-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.return-to-catalog,
+.checkout-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff5c5c;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.return-to-catalog:hover,
+.checkout-button:hover {
+    background-color: #d94545;
+    transform: scale(1.05);
+}
+
+.total {
+    font-size: 20px;
+    font-weight: bold;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Оформление заказа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2, p {
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        .button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 4px;
+        }
+        .button {
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #cc3d3d;
+        }
+        .button-secondary {
+            background-color: #333;
+            color: #fff;
+        }
+        .fade {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .fade:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Данные покупателя</h1>
+    <form action="{{ url_for('purchase.complete_purchase') }}" method="POST">
+        <label>Имя</label>
+        <input type="text" name="name" value="{{ current_user.name }}" readonly>
+
+        <label>Email</label>
+        <input type="email" name="email" value="{{ current_user.email }}" readonly>
+
+        <label>Телефон</label>
+        <input type="tel" name="phone" value="{{ current_user.phone }}" readonly>
+
+        <label>Адрес</label>
+        <input type="text" name="address" value="{{ current_user.address }}" readonly>
+
+        <h2>Итого: {{ total_price }} руб.</h2>
+        <button href="{{ url_for('purchase.show_purchase')}}" type="submit" class="button fade">Завершить покупку</button>
+        <a href="{{ url_for('catalog.catalog') }}" class="button button-secondary fade">Вернуться в каталог</a>
+        <a href="{{ url_for('wishlist.view_wishlist') }}" class="button button-secondary fade">Вернуться в корзину</a>
+    </form>
+    {% if order_success %}
+        <p>Заказ успешно создан!</p>
+    {% endif %}
+</div>
+</body>
+</html>

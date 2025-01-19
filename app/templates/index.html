@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Добро пожаловать на наш сайт</h1>
+        <p class="description">Мы предлагаем широкий ассортимент различных коллекционных фигурок, которые мы покупаем только у официальных производителей.</p>
+
+        <h2>Контакты</h2>
+        <p>Телефон: +7 (812) 952-52-52</p>
+        <p>Email: e.kamo71kov@gmail.com</p>
+
+
+        <div class="auth-buttons">
+            <a href="{{ url_for('auth.login') }}" class="button">Вход</a>
+            <a href="{{ url_for('auth.register') }}" class="button">Регистрация</a>
+        </div>
+    </div>
+</body>
+</html>

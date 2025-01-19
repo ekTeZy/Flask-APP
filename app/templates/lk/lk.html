@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #f3f3f3, #e8e8e8);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: box-shadow 0.3s ease, border 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #388E3C, #66BB6A);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #333, #555);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #111, #444);
+            transform: scale(1.05);
+        }
+
+        .button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #FF5722, #FF8A65);
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #E64A19, #FF7043);
+            transform: scale(1.05);
+        }
+
+        .flashes p {
+            color: #E53935;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Личный кабинет</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="{{ url_for('lk.lk_login') }}">
+            <label for="name">Имя</label>
+            <input type="text" id="name" name="name" value="{{ user.name }}" required>
+        
+            <label for="email">Электронная почта</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}" required>
+        
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" name="phone" value="{{ user.phone }}" required>
+        
+            <label for="address">Адрес</label>
+            <input type="text" id="address" name="address" value="{{ user.address }}">
+        
+            <button type="submit" class="btn btn-success">Сохранить изменения</button>
+        </form>
+        
+        <a href="{{ url_for('lk.change_password') }}" class="btn btn-secondary">Сменить пароль</a>
+        <a href="{{ url_for('catalog.catalog') }}" class="button">Вернуться в каталог</a>
+    </div>
+</body>
+</html>
