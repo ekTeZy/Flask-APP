@@ -84,5 +84,16 @@ Flask-APP/
 - Flask-Migrate — управление миграциями базы данных.
 - PostgreSQL — реляционная база данных.
 - WTForms — для работы с формами.
+
+## Изображения сайта 
+![image](https://github.com/user-attachments/assets/8b7193ba-1f0f-49bc-bb99-63ed2551c6ec)
+![image](https://github.com/user-attachments/assets/e7b27d4e-bec2-4dd3-abc5-600931c4c8bf)
+![image](https://github.com/user-attachments/assets/462c6027-9cf3-4869-a709-338cb14d252a)
+![image](https://github.com/user-attachments/assets/49086674-ce02-4ad8-8a74-8cb6bedc3936)
+
+
+
+
+
 ## Лицензия
 Этот проект не лицензирован и предназначен для учебных целей.
